@@ -14,7 +14,7 @@ This one uses more recent and advanced methods for co-registration and \
 
 from datetime import datetime
 import os
-#import py_gamma as pg
+import py_gamma as pg
 
 import sys
 print(sys.version)
@@ -100,12 +100,18 @@ def s1_slc_coreg(SLC1, SLC2,
                  offs, ccp,
                  offsets_txt,
                  n_ovr,
-                 nr, naz,
                  thres,
                  lanczos,
                  bw_frac,
+                 coffs,
                  COREG_SLC2,
-                 COREG_SLC2_par):
+                 COREG_SLC2_par,
+                 slc1_bmp,
+                 coreg_slc_bmp):
+    
+    print(SLC1, SLC2, SLC1_par, SLC2_par, OFF_par, rlks, azlks,
+          rwin_01, azwin_01, rwin_02, azwin_02, offs, ccp, offsets_txt,
+          n_ovr, thres, lanczos, bw_frac, coffs, COREG_SLC2, COREG_SLC2_par, slc1_bmp, coreg_slc_bmp)
     
     '''
     ##These Three steps might not be necessary
@@ -157,7 +163,7 @@ def s1_slc_coreg(SLC1, SLC2,
                   rwin_02,azwin_02,
                   offsets_txt,
                   n_ovr,
-                  nr, naz,
+                  '-', '-',  #Numner of Offsets un Az R, default from off_par
                   thres,
                   lanczos,
                   bw_frac,
@@ -182,7 +188,32 @@ def s1_slc_coreg(SLC1, SLC2,
                   COREG_SLC2,
                   COREG_SLC2_par)
     
+    slc1_params = pg.ParFile(SLC1_par)
+    slc1_width = slc1_params.get_value('range_samples')
     
+    print('SLC1 Width:', slc1_width,'\n')
+    
+    coreg_params = pg.ParFile(COREG_SLC2_par)
+    coreg_width = coreg_params.get_value('range_samples')
+    
+    print('Coregistered SLC2 Width:', coreg_width,'\n')
+    
+    
+    pg.rascpx(SLC1, 
+              slc1_width,
+              0, '-', '-', 5, 5,
+              '-', '-', 'gray.cm', 
+              slc1_bmp, 
+              '-', '-', 1, '-')
+    
+    pg.rascpx(COREG_SLC2, 
+              coreg_width,
+              0, '-', '-', 5, 5,
+              '-', '-', 'gray.cm', 
+              coreg_slc_bmp, 
+              '-', '-', 1, '-')
+    
+'''    
 def s1_slc_pwr_tracking():
     
     #Initial Offset estimate with Very Large Window (Is this the same as for Coreg)
