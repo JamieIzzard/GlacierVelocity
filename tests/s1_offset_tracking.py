@@ -82,7 +82,7 @@ if __name__ == "__main__":
         offsets_txt = os.path.join(base_path, pair, f'{pair}.offsets.txt')
         coffs = os.path.join(base_path, pair, f'{pair}.coffs')
     
-        slc1_bmp = os.path.join(base_path, pair, pair, f'{pair}.SLC1.bmp')
+        slc1_bmp = os.path.join(base_path, pair, f'{pair}.SLC1.bmp')
         coreg_slc_bmp = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.bmp')
         
         files = [
