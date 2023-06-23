@@ -167,7 +167,7 @@ def s1_slc_coreg(SLC1, SLC2,
                   thres,
                   lanczos,
                   bw_frac,
-                  0,1,0,3) #No Deramp, Low Pass filter of Intensity, Print Summmary, Output pdf plot)
+                  0,1,0,0) #No Deramp, Low Pass filter of Intensity, Print Summmary, No  pdf plot)
                   
                   
         
@@ -201,17 +201,17 @@ def s1_slc_coreg(SLC1, SLC2,
     
     pg.rascpx(SLC1, 
               slc1_width,
-              0, '-', '-', 5, 5,
+              1, '-', '-', 20, 5,
               '-', '-', 'gray.cm', 
               slc1_bmp, 
-              '-', '-', 1, '-')
+              '-', '-', 0, '-')
     
     pg.rascpx(COREG_SLC2, 
               coreg_width,
-              0, '-', '-', 5, 5,
+              1, '-', '-', 20, 5,
               '-', '-', 'gray.cm', 
               coreg_slc_bmp, 
-              '-', '-', 1, '-')
+              '-', '-', 0, '-')
     
 '''    
 def s1_slc_pwr_tracking():
