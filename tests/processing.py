@@ -213,22 +213,62 @@ def s1_slc_coreg(SLC1, SLC2,
               coreg_slc_bmp, 
               '-', '-', 0, '-')
     
-'''    
-def s1_slc_pwr_tracking():
+
+
     
-    #Initial Offset estimate with Very Large Window (Is this the same as for Coreg)
-    pg.offset_pwr_tracking()
+    #Need to Check the Following:
+        #Should I be creating a new off_par file after Co-registration?
+        #Is the offset_pwr in coreg equivalent to offset_pwr_tracking?
+        
+def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_par: str, OFF_par: str, pt1_offs: str,
+                        pt1_ccp: str, pt1_rwin: int, pt1_azwin: int, pt1_novr: int, pt1_thres: float, pt1_rstep: int, 
+                        pt1_azstep: int, pt_lanczos: int, pt_bw_frac: float, pt1_disp: str, disp_bmp: str):
+    
+    # Initial Offset estimate with Very Large Window
+    pg.offset_pwr_tracking(SLC1, COREG_SLC2, SLC1_par, COREG_SLC2_par, OFF_par, pt1_offs, pt1_ccp, pt1_rwin, 
+                           pt1_azwin, '-', pt1_novr, pt1_thres, pt1_rstep, pt1_azstep, '-', '-', '-', '-', pt_lanczos, 
+                           pt_bw_frac, 0, 1, 0, 0)
+    
+    # Convert Initial Offset Estimate to Displacement Map
+    pg.offset_tracking(pt1_offs, pt1_ccp, SLC1_par, OFF_par, pt1_disp, '-', 2, '-', '-')
+    
+    params = pg.ParFile(OFF_par)
+    pixels = params.get_value('offset_estimation_range_samples')
+    
+    pg.rascpx(pt1_disp, pixels, '-', '-', '-', '-', '-', '-', '-', disp_bmp)
+
+
+    '''
     
     #Fill in gaps in inital estimate
-    pg.interp_ad
+    pg.interp_ad(offs,
+                 interp_offs, 
+        )
     
     #This time precise offsets
-    pg.offset_pwr_tracking2()
+    pg.offset_pwr_tracking2(SLC1,
+                            COREG_SLC2,
+                            SLC1_par,
+                            COREG_SLC2_par,
+                            OFF_par,
+                            pt2_offs,
+                            pt2_ccp,
+                            OFF_par2,
+                            offs2,
+                            pt2_rwin, pt2_azwin,
+                            '-',
+                            pt2_novr,
+                            pt2_thres,
+                            pt2_rstep, pt2_azstep,
+                            '-','-','-','-',
+                            pt2_bw_frac,
+                            0,1,0,0)
+        
     
     pg.offset_tracking()
     
-    
-
+    '''
+'''
 def s1_vel_geocoding():
     
 '''

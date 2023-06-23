@@ -40,6 +40,24 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                       slc1_bmp,
                       coreg_slc_bmp)
     
+    proc.s1_slc_pwr_tracking(SLC1, 
+                    COREG_SLC2, 
+                    SLC1_par, 
+                    COREG_SLC2_par, 
+                    OFF_par, 
+                    pt1_offs, 
+                    pt1_ccp, 
+                    Config.pt1_rwin, 
+                    Config.pt1_azwin, 
+                    Config.pt1_novr, 
+                    Config.pt1_thres, 
+                    Config.pt1_rstep, 
+                    Config.pt1_azstep, 
+                    Config.pt_lanczos, 
+                    Config.pt_bw_frac, 
+                    pt1_disp, 
+                    disp_bmp)
+    
     
 
     # ... function body ...
@@ -62,6 +80,7 @@ if __name__ == "__main__":
         print("Image A: ", image_A)
         print("Image B: ", image_B)
         
+        #COREGISTRATION 
     
         # Input Files
         SLC1 = os.path.join(base_path, pair, image_A, f'{image_A}.slc')
@@ -70,8 +89,7 @@ if __name__ == "__main__":
         SLC1_par = os.path.join(base_path, pair, image_A, f'{image_A}.slc_par')
         SLC2_par = os.path.join(base_path, pair, image_B, f'{image_B}.slc_par')
         
-        
-        
+    
         #Output Files
         COREG_SLC2 = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.slc')
         COREG_SLC2_par = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.par')
@@ -85,6 +103,17 @@ if __name__ == "__main__":
         slc1_bmp = os.path.join(base_path, pair, f'{pair}.SLC1.bmp')
         coreg_slc_bmp = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.bmp')
         
+        
+        #OFFSET TRACKING
+        
+        # Output Files
+        
+        pt1_offs = os.path.join(base_path, pair, f'{pair}.pt1.offs')
+        pt1_ccp = os.path.join(base_path, pair, f'{pair}.pt1.ccp')
+        pt1_disp = os.path.join(base_path, pair, f'{pair}.pt1.disp')
+        disp_bmp = os.path.join(base_path, pair, f'{pair}.pt1_disp.bmp')
+        
+        
         files = [
             COREG_SLC2,
             COREG_SLC2_par,
@@ -95,6 +124,10 @@ if __name__ == "__main__":
             coffs,
             slc1_bmp,
             coreg_slc_bmp,
+            pt1_offs,
+            pt1_ccp,
+            pt1_disp,
+            disp_bmp
         ]
         
         for file in files:
