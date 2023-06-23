@@ -19,8 +19,8 @@ class Config:
 
     # COREGISTRATION PARAMETERS
     
-    rlks = 32         # These Should be Same as Step Size in Feature Tracking
-    azlks = 8        #
+    rlks = 128         # These Should be Same as Step Size in Feature Tracking
+    azlks = 32       #
     
     rwin_01 = 1028      # Range Window Size for Initial Offset determination
     azwin_01 = 256    # Azimuth Window Size for Initial Offset determination

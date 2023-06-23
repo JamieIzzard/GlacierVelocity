@@ -63,23 +63,46 @@ if __name__ == "__main__":
         print("Image B: ", image_B)
         
     
+        # Input Files
         SLC1 = os.path.join(base_path, pair, image_A, f'{image_A}.slc')
         SLC2 = os.path.join(base_path, pair, image_B, f'{image_B}.slc')
     
         SLC1_par = os.path.join(base_path, pair, image_A, f'{image_A}.slc_par')
         SLC2_par = os.path.join(base_path, pair, image_B, f'{image_B}.slc_par')
-    
+        
+        
+        
+        #Output Files
         COREG_SLC2 = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.slc')
         COREG_SLC2_par = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.par')
     
-        OFF_par = os.path.join(base_path, pair, f'{pair}.OFF.par')
+        OFF_par = os.path.join(base_path, pair, f'{pair}.off.par')
         offs = os.path.join(base_path, pair, f'{pair}.offs')
         ccp = os.path.join(base_path, pair, f'{pair}.ccp')
         offsets_txt = os.path.join(base_path, pair, f'{pair}.offsets.txt')
         coffs = os.path.join(base_path, pair, f'{pair}.coffs')
     
-        slc1_bmp = os.path.join(base_path, pair, image_A, f'{image_A}.SLC1.bmp')
+        slc1_bmp = os.path.join(base_path, pair, pair, f'{pair}.SLC1.bmp')
         coreg_slc_bmp = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.bmp')
+        
+        files = [
+            COREG_SLC2,
+            COREG_SLC2_par,
+            OFF_par,
+            offs,
+            ccp,
+            offsets_txt,
+            coffs,
+            slc1_bmp,
+            coreg_slc_bmp,
+        ]
+        
+        for file in files:
+            if os.path.exists(file):
+                os.remove(file)
+                print(f'File {file} has been deleted.')
+            else:
+                print(f'File {file} does not exist.')
         
         print('Copying Scripts to Output Directory ')
         # Copy the scripts to the target folder
