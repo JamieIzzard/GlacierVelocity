@@ -235,7 +235,7 @@ def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_pa
     params = pg.ParFile(OFF_par)
     pixels = params.get_value('offset_estimation_range_samples')
     
-    pg.rascpx(pt1_disp, pixels, '-', '-', '-', '-', '-', '-', '-', disp_bmp)
+    pg.rascpx(pt1_disp, pixels, '-', '-', '-', '-', '-', '-', 'viridis.cm', disp_bmp)
 
 
     '''
