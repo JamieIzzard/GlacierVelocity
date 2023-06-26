@@ -27,5 +27,5 @@ The code is split into three files:
 **4. s1_vel_geocoding**: Converts velocity from slant range to ground range and creates a GeoTIFF. 
 
 ## Future Work
-Future versions will improve system compatibility and extend setup for more types of imagery beyond Sentinel-1 SLCs. Please watch this space for updates.
+Future versions will improve system compatibility and extend setup for more types of imagery beyond Sentinel-1 SLCs
    
