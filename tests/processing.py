@@ -227,7 +227,8 @@ def s1_slc_coreg(SLC1, SLC2,
         
 def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_par: str, OFF_par: str, pt1_offs: str,
                         pt1_ccp: str, pt1_rwin: int, pt1_azwin: int, pt1_novr: int, pt1_thres: float, pt1_rstep: int, 
-                        pt1_azstep: int, pt_lanczos: int, pt_bw_frac: float, pt1_disp: str, disp_bmp: str):
+                        pt1_azstep: int, pt_lanczos: int, pt_bw_frac: float, pt1_disp: str, pt1_disp_bmp: str,
+                        interval: float, pt1_gnd: str, pt1_real_off: str, pt1_ccp_bmp: str, pt1_vel_bmp: str):
     
     # Initial Offset estimate with Very Large Window
     pg.offset_pwr_tracking(SLC1, COREG_SLC2, SLC1_par, COREG_SLC2_par, OFF_par, pt1_offs, pt1_ccp, pt1_rwin, 
@@ -241,8 +242,15 @@ def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_pa
     pixels = params.get_value('offset_estimation_range_samples')
     
     
-    pg.rascpx(pt1_disp, pixels, 0, '-', '-', '-', '-', '-','-','viridis.cm', disp_bmp)
+    pg.rascpx(pt1_disp, pixels, 0, '-', '-', '-', '-', '-','-','viridis.cm', pt1_disp_bmp)
+    
+    pg.lin_comb_cpx(1,pt1_disp,0,0,interval, 0,pt1_gnd,pixels,1,0,1,1,1)
 
+    pg.cpx_to_real(pt1_gnd, pt1_real_off, pixels, 3)
+    
+    pg.ras_linear(pt1_ccp, pixels, cmap='cc.cm', rasf=pt1_ccp_bmp)
+    
+    pg.ras_linear(pt1_real_off, pixels, '-','-','-','-',0,1, '-','viridis.cm',pt1_vel_bmp)
 
     '''
     
@@ -274,7 +282,55 @@ def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_pa
     pg.offset_tracking()
     
     '''
-'''
-def s1_vel_geocoding():
+
+def s1_vel_geocoding(COREG_SLC2_par: str, OFF_par: str, dem_par: str, dem: str, dem_seg_par: str, dem_seg: str,
+                     geo_lut: str, real_off: str, vel_geo: str, vel_tif: str):
     
-'''
+    pg.gc_map(COREG_SLC2_par,
+              OFF_par,
+              dem_par,
+              dem,
+              dem_seg_par,
+              dem_seg,
+              geo_lut)  
+        
+
+    dem_seg_par_obj = pg.ParFile(dem_seg_par)
+    geocoded_width = dem_seg_par_obj.get_value('width', dtype=int)
+
+    params = pg.ParFile(OFF_par)
+    pixels = params.get_value('offset_estimation_range_samples')
+
+    print(pixels, geocoded_width)
+        
+    pg.geocode_back(real_off,\
+                    pixels,\
+                    geo_lut,\
+                    vel_geo,\
+                    geocoded_width,\
+                    '-',3,0)
+        
+    pg.data2geotiff(dem_seg_par, vel_geo, 2, vel_tif)
+    
+    '''
+        
+    pg.geocode_back(x_offs,\
+                    pixels,\
+                    geo_lut,\
+                    x_geo,\
+                    geocoded_width,\
+                    '-',3,0)
+    pg.geocode_back(y_offs,\
+                    pixels,\
+                    geo_lut,\
+                    y_geo,\
+                    geocoded_width,\
+                    '-',3,0)
+        
+    pg.swap_bytes(x_geo, x_geo_swab,4)
+    pg.swap_bytes(y_geo, y_geo_swab,4)
+
+    pg.data2geotiff(dem_seg_par, x_geo, 2, x_tif)
+    pg.data2geotiff(dem_seg_par, y_geo, 2, y_tif)
+    
+    '''

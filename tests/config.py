@@ -11,16 +11,22 @@ class Config:
     IMAGE_DIR = 'data/images/s1/' 
     
     IMAGE_A_NAME = 'S1A_IW_20210702_125716_038599'
-    IMAGE_B_NAME = 'S1A_IW_20210714_125717_038774'
+    IMAGE_B_NAME = 'S1A_IW_20210726_125718_038949'
     
     IMAGE_A_PATH = os.path.join(PROJECT_DIR, IMAGE_DIR, IMAGE_A_NAME)
     IMAGE_B_PATH = os.path.join(PROJECT_DIR, IMAGE_DIR, IMAGE_B_NAME)
+    
+    
+    #DEMS
+    
+    dem_par = '/nfs/a285/homes/gyjai/dems/baltoro_cop30.dem_par'
+    dem = '/nfs/a285/homes/gyjai/dems/baltoro_cop30.dem'
 
 
     # COREGISTRATION PARAMETERS
     
-    rlks = 128         # These Should be Same as Step Size in Feature Tracking
-    azlks = 32       #
+    rlks = 32         # These Should be Same as Step Size in Feature Tracking
+    azlks = 8       #
     
     rwin_01 = 1028      # Range Window Size for Initial Offset determination
     azwin_01 = 256    # Azimuth Window Size for Initial Offset determination
@@ -45,6 +51,9 @@ class Config:
     pt1_azstep = 32
     pt_lanczos = 5
     pt_bw_frac = 1.0
+    
+    #
+    interval = 0.041667
 
     
     

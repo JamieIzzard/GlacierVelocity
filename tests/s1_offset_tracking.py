@@ -58,8 +58,23 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                     Config.pt_lanczos, 
                     Config.pt_bw_frac, 
                     pt1_disp, 
-                    disp_bmp)
+                    pt1_disp_bmp,
+                    Config.interval, 
+                    pt1_gnd,
+                    pt1_real_off,
+                    pt1_ccp_bmp,
+                    pt1_vel_bmp)
     
+    proc.s1_vel_geocoding(COREG_SLC2_par,
+                         OFF_par,
+                         Config.dem_par,
+                         Config.dem,
+                         dem_seg_par,
+                         dem_seg,
+                         geo_lut,
+                         pt1_real_off,
+                         vel_geo,
+                         vel_tif)
     
 
     # ... function body ...
@@ -67,7 +82,7 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
 if __name__ == "__main__":
     
     base_path = '/nfs/a285/homes/gyjai/coding_projects/comparing_sar_vel/tests/data/pairs/'
-    image_folders = ['S1A_IW_20210702_125716_038599__S1A_IW_20210714_125717_038774']  # your actual folder names here
+    image_folders = ['S1A_IW_20210702_125716_038599__S1A_IW_20210726_125718_038949']  # your actual folder names here
 
 
 
@@ -85,11 +100,11 @@ if __name__ == "__main__":
         #COREGISTRATION 
     
         # Input Files
-        SLC1 = os.path.join(base_path, pair, image_A, f'{image_A}.slc')
-        SLC2 = os.path.join(base_path, pair, image_B, f'{image_B}.slc')
+        SLC1 = os.path.join(base_path, pair, image_A, f'{image_A}.baltoro_slc')
+        SLC2 = os.path.join(base_path, pair, image_B, f'{image_B}.baltoro_slc')
     
-        SLC1_par = os.path.join(base_path, pair, image_A, f'{image_A}.slc_par')
-        SLC2_par = os.path.join(base_path, pair, image_B, f'{image_B}.slc_par')
+        SLC1_par = os.path.join(base_path, pair, image_A, f'{image_A}.baltoro_slc_par')
+        SLC2_par = os.path.join(base_path, pair, image_B, f'{image_B}.baltoro_slc_par')
         
     
         #Output Files
@@ -113,7 +128,21 @@ if __name__ == "__main__":
         pt1_offs = os.path.join(base_path, pair, f'{pair}.pt1.offs')
         pt1_ccp = os.path.join(base_path, pair, f'{pair}.pt1.ccp')
         pt1_disp = os.path.join(base_path, pair, f'{pair}.pt1.disp')
-        disp_bmp = os.path.join(base_path, pair, f'{pair}.pt1_disp.bmp')
+        pt1_disp_bmp = os.path.join(base_path, pair, f'{pair}.pt1_disp.bmp')
+        
+        pt1_gnd = os.path.join(base_path, pair, f'{pair}.pt1.gnd')
+        pt1_real_off = os.path.join(base_path, pair, f'{pair}.pt1.real_off')
+        pt1_ccp_bmp = os.path.join(base_path, pair, f'{pair}.pt1.ccp.bmp')
+        pt1_vel_bmp = os.path.join(base_path, pair, f'{pair}.pt1.vel.bmp')
+        
+        
+        # Geocoding Velocity
+    
+        dem_seg_par = os.path.join(base_path, pair, f'{pair}.dem_seg_par')
+        dem_seg = os.path.join(base_path, pair, f'{pair}.dem_seg')
+        geo_lut = os.path.join(base_path, pair, f'{pair}.geo.lut')
+        vel_geo = os.path.join(base_path, pair, f'{pair}.pt1.vel.geo')
+        vel_tif = os.path.join(base_path, pair, f'{pair}.pt1.vel.geo.tif')
         
         
         files = [
@@ -129,8 +158,9 @@ if __name__ == "__main__":
             pt1_offs,
             pt1_ccp,
             pt1_disp,
-            disp_bmp
+            pt1_disp_bmp
         ]
+        
         
         for file in files:
             if os.path.exists(file):
@@ -138,6 +168,7 @@ if __name__ == "__main__":
                 print(f'File {file} has been deleted.')
             else:
                 print(f'File {file} does not exist.')
+        
         
         print('Copying Scripts to Output Directory ')
         # Copy the scripts to the target folder
