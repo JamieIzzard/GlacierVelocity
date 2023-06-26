@@ -43,9 +43,9 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                       coreg_slc_bmp)
     
     proc.s1_slc_pwr_tracking(SLC1, 
-                    COREG_SLC2, 
+                    SLC2, 
                     SLC1_par, 
-                    COREG_SLC2_par, 
+                    SLC2_par, 
                     OFF_par, 
                     pt1_offs, 
                     pt1_ccp, 
@@ -65,7 +65,7 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                     pt1_ccp_bmp,
                     pt1_vel_bmp)
     
-    proc.s1_vel_geocoding(COREG_SLC2_par,
+    proc.s1_vel_geocoding(SLC2_par,
                          OFF_par,
                          Config.dem_par,
                          Config.dem,
