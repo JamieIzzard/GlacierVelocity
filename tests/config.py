@@ -30,19 +30,19 @@ class Config:
     
     rwin_02 = 256      #
     azwin_02 = 64     #
-    n_ovr = 2       #
+    n_ovr = 1     #
     thres = 0.1        # 
     lanczos = 5      #
     bw_frac = 1      #
     
     #Parameters for Offset_pwr_tracking
     
-    pt1_rwin = 1028
-    pt1_azwin = 256
-    pt1_novr = 2
+    pt1_rwin = 512
+    pt1_azwin = 128
+    pt1_novr = 1
     pt1_thres = 0.1
-    pt1_rstep = 64
-    pt1_azstep = 16
+    pt1_rstep = 128
+    pt1_azstep = 32
     pt_lanczos = 5
     pt_bw_frac = 1.0
 

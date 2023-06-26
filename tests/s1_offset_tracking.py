@@ -12,6 +12,8 @@ import os
 import shutil
 
 
+
+
 def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par, 
          OFF_par, offs, ccp, offsets_txt, coffs, slc1_bmp, coreg_slc_bmp):
             

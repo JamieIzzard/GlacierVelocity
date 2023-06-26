@@ -19,9 +19,14 @@ import py_gamma as pg
 import sys
 print(sys.version)
 
+sys.path.insert(0, '/apps/applications/gamma/20221129/1/default/')
+
 
 def f_testing(test_var):
     print(test_var)
+
+
+viridis_cmap = '/nfs/a1/earmla/software/GAMMA/20221129/DISP/cmaps/viridis.cm'
 
 
 
@@ -235,7 +240,8 @@ def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_pa
     params = pg.ParFile(OFF_par)
     pixels = params.get_value('offset_estimation_range_samples')
     
-    pg.rascpx(pt1_disp, pixels, '-', '-', '-', '-', '-', '-', 'viridis.cm', disp_bmp)
+    
+    pg.rascpx(pt1_disp, pixels, 0, '-', '-', '-', '-', '-','-','viridis.cm', disp_bmp)
 
 
     '''
