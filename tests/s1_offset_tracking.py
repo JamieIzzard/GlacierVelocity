@@ -69,7 +69,7 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                          OFF_par,
                          Config.dem_par,
                          Config.dem,
-                         dem_seg_par,
+                         Config.dem_seg_par,
                          dem_seg,
                          geo_lut,
                          pt1_real_off,
@@ -138,7 +138,6 @@ if __name__ == "__main__":
         
         # Geocoding Velocity
     
-        dem_seg_par = os.path.join(base_path, pair, f'{pair}.dem_seg_par')
         dem_seg = os.path.join(base_path, pair, f'{pair}.dem_seg')
         geo_lut = os.path.join(base_path, pair, f'{pair}.geo.lut')
         vel_geo = os.path.join(base_path, pair, f'{pair}.pt1.vel.geo')
@@ -158,7 +157,8 @@ if __name__ == "__main__":
             pt1_offs,
             pt1_ccp,
             pt1_disp,
-            pt1_disp_bmp
+            pt1_disp_bmp,
+            dem_seg
         ]
         
         

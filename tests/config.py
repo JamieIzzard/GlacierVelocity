@@ -21,6 +21,8 @@ class Config:
     
     dem_par = '/nfs/a285/homes/gyjai/dems/baltoro_cop30.dem_par'
     dem = '/nfs/a285/homes/gyjai/dems/baltoro_cop30.dem'
+    
+    dem_seg_par = '/nfs/a285/homes/gyjai/dems/baltoro_10.dem_seg_par'
 
 
     # COREGISTRATION PARAMETERS
@@ -47,8 +49,8 @@ class Config:
     pt1_azwin = 128
     pt1_novr = 1
     pt1_thres = 0.1
-    pt1_rstep = 128
-    pt1_azstep = 32
+    pt1_rstep = 32
+    pt1_azstep = 8
     pt_lanczos = 5
     pt_bw_frac = 1.0
     
