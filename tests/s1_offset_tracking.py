@@ -19,10 +19,11 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
             
     proc.f_testing(Config.test)
     
-    #proc.make_image_pair(Config.IMAGE_A_PATH, Config.IMAGE_B_PATH)
+    
+    proc.make_image_pair(Config.IMAGE_A_PATH, Config.IMAGE_B_PATH, pair_directory)
     
     print('Coregistering Images')
-
+    
     
     proc.s1_slc_coreg(SLC1, SLC2,
                       SLC1_par, SLC2_par,
@@ -76,19 +77,32 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                          vel_geo,
                          vel_tif)
     
+    
+    
 
     # ... function body ...
 
 if __name__ == "__main__":
     
     base_path = '/nfs/a285/homes/gyjai/coding_projects/comparing_sar_vel/tests/data/pairs/'
-    image_folders = ['S1A_IW_20210702_125716_038599__S1A_IW_20210726_125718_038949']  # your actual folder names here
-
-
-
     
+    
+    pair_common = (f"{Config.IMAGE_A_NAME}__{Config.IMAGE_B_NAME}__"
+           f"{Config.rwin_01}_{Config.azwin_01}_{Config.rwin_02}_{Config.azwin_02}_"
+           f"{Config.pt1_rwin}_{Config.pt1_azwin}")
+
+    pair_name = pair_common
+    pair_directory = f"data/pairs/{pair_common}"
+
+    image_folders = [pair_common] 
+
     for pair in image_folders:
         
+        print(pair)
+        
+        
+        os.makedirs(pair_directory, exist_ok=True)
+        print('Pair directory created:', pair_directory)
         
         parts = pair.split("__")  # This will split the string into two parts
         image_A = parts[0]  # This is the part before the "__"

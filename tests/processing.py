@@ -30,7 +30,7 @@ viridis_cmap = '/nfs/a1/earmla/software/GAMMA/20221129/DISP/cmaps/viridis.cm'
 
 
 
-def make_image_pair(IMAGE_A_PATH, IMAGE_B_PATH):
+def make_image_pair(IMAGE_A_PATH, IMAGE_B_PATH, pair_directory):
     
     print('making pair')
     
@@ -57,9 +57,6 @@ def make_image_pair(IMAGE_A_PATH, IMAGE_B_PATH):
     image_b_name = os.path.basename(IMAGE_B_PATH)
     
     # Create new directory
-    pair_directory = f"data/pairs/{image_a_name}__{image_b_name}/"
-    os.makedirs(pair_directory, exist_ok=True)
-    print('Pair directory created:', pair_directory)
     
     
     
@@ -93,6 +90,7 @@ def make_image_pair(IMAGE_A_PATH, IMAGE_B_PATH):
     time_difference = abs(start_date_time_a - start_date_time_b)
     
     print(time_difference)
+
 
 
 
