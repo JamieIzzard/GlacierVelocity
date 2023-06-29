@@ -50,7 +50,7 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
     proc.s1_mli_geocoding(SLC2, SLC2_par, MLI2, MLI2_par, Config.dem_par, Config.dem, Config.dem_seg_par,
                           dem_seg, mli_lut2, mli_geo2, mli_geo_bmp2, mli_tif2)
     
-    '''
+    
     
     proc.s1_slc_pwr_tracking(SLC1, 
                     SLC2, 
@@ -86,7 +86,7 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                          vel_geo,
                          vel_tif)
     
-    '''
+    
     
     
     
