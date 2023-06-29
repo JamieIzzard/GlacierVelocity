@@ -280,6 +280,26 @@ def s1_slc_pwr_tracking(SLC1: str, COREG_SLC2: str, SLC1_par: str, COREG_SLC2_pa
     pg.offset_tracking()
     
     '''
+def s1_mli_geocoding(SLC, SLC_par, MLI, MLI_par, dem_par, dem, dem_seg_par, dem_seg,
+                     mli_lut, mli_geo, mli_geo_bmp, mli_tif):
+    
+    pg.multi_look(SLC, SLC_par, MLI, MLI_par, 5, 1)  
+    
+    pg.gc_map(MLI_par, '-', dem_par, dem, dem_seg_par, dem_seg, mli_lut)
+    
+    dem_seg_par_obj = pg.ParFile(dem_seg_par)
+    geocoded_width = dem_seg_par_obj.get_value('width', dtype=int)
+    
+    mli_par_obj = pg.ParFile(MLI_par)
+    mli_width = mli_par_obj.get_value('range_samples', dtype=int)
+    
+    pg.geocode_back(MLI, mli_width, mli_lut, mli_geo, geocoded_width, '-', 3, 0)
+    
+    pg.ras_dB(mli_geo, geocoded_width, '-', '-', 1, 1, '-', '-', 'gray.cm', mli_geo_bmp)
+    
+    pg.data2geotiff(dem_seg_par, mli_geo, 2, mli_tif)
+    
+    
 
 def s1_vel_geocoding(COREG_SLC2_par: str, OFF_par: str, dem_par: str, dem: str, dem_seg_par: str, dem_seg: str,
                      geo_lut: str, real_off: str, vel_geo: str, vel_tif: str):

@@ -43,6 +43,15 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                       slc1_bmp,
                       coreg_slc_bmp)
     
+    
+    proc.s1_mli_geocoding(SLC1, SLC1_par, MLI1, MLI1_par, Config.dem_par, Config.dem, Config.dem_seg_par,
+                          dem_seg, mli_lut1, mli_geo1, mli_geo_bmp1, mli_tif1)
+    
+    proc.s1_mli_geocoding(SLC2, SLC2_par, MLI2, MLI2_par, Config.dem_par, Config.dem, Config.dem_seg_par,
+                          dem_seg, mli_lut2, mli_geo2, mli_geo_bmp2, mli_tif2)
+    
+    '''
+    
     proc.s1_slc_pwr_tracking(SLC1, 
                     SLC2, 
                     SLC1_par, 
@@ -77,6 +86,10 @@ def main(SLC1, SLC2, SLC1_par, SLC2_par, COREG_SLC2, COREG_SLC2_par,
                          vel_geo,
                          vel_tif)
     
+    '''
+    
+    
+    
     
     
 
@@ -86,10 +99,17 @@ if __name__ == "__main__":
     
     base_path = '/nfs/a285/homes/gyjai/coding_projects/comparing_sar_vel/tests/data/pairs/'
     
-    
+    '''
     pair_common = (f"{Config.IMAGE_A_NAME}__{Config.IMAGE_B_NAME}__"
            f"{Config.rwin_01}_{Config.azwin_01}_{Config.rwin_02}_{Config.azwin_02}_"
            f"{Config.pt1_rwin}_{Config.pt1_azwin}")
+    
+    '''
+    
+    pair_common = (f"{Config.IMAGE_A_NAME}__{Config.IMAGE_B_NAME}__testing_mli")
+           
+    
+    
 
     pair_name = pair_common
     pair_directory = f"data/pairs/{pair_common}"
@@ -133,6 +153,27 @@ if __name__ == "__main__":
     
         slc1_bmp = os.path.join(base_path, pair, f'{pair}.SLC1.bmp')
         coreg_slc_bmp = os.path.join(base_path, pair, f'{pair}.COREG_SLC2.bmp')
+        
+        #MLIs
+        
+        MLI1 = os.path.join(base_path, pair, f'{image_A}.baltoro_mli')
+        MLI2 = os.path.join(base_path, pair, f'{image_B}.baltoro_mli')
+
+        MLI1_par = os.path.join(base_path, pair, f'{image_A}.baltoro_mli_par')
+        MLI2_par = os.path.join(base_path, pair, f'{image_B}.baltoro_mli_par')
+        
+        mli_lut1 = os.path.join(base_path, pair, f'{image_A}.baltoro_mli_lut')
+        mli_lut2 = os.path.join(base_path, pair, f'{image_B}.baltoro_mli_lut')
+        
+        mli_geo1 = os.path.join(base_path, pair, f'{image_A}.baltoro_mli_geo')
+        mli_geo2 = os.path.join(base_path, pair, f'{image_B}.baltoro_mli_geo')
+                            
+        mli_geo_bmp1 = os.path.join(base_path, pair, f'{image_A}.baltoro_mli_geo.bmp')
+        mli_geo_bmp2 = os.path.join(base_path, pair, f'{image_B}.baltoro_mli_geo.bmp')
+        
+        mli_tif1 = os.path.join(base_path, pair, f'{image_A}.baltoro_mli_geo.tif')
+        mli_tif2 = os.path.join(base_path, pair, f'{image_B}.baltoro_mli_geo.tif')
+        
         
         
         #OFFSET TRACKING

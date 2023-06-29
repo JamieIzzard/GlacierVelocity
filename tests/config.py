@@ -30,14 +30,14 @@ class Config:
     rlks = 32         # These Should be Same as Step Size in Feature Tracking
     azlks = 8       #
     
-    rwin_01 = 1028      # Range Window Size for Initial Offset determination
-    azwin_01 = 256    # Azimuth Window Size for Initial Offset determination
+    rwin_01 = 512      # Range Window Size for Initial Offset determination
+    azwin_01 = 128    # Azimuth Window Size for Initial Offset determination
     
     
     #Parameters for offset_pwr
     
-    rwin_02 = 256      #
-    azwin_02 = 64     #
+    rwin_02 = 1028     #
+    azwin_02 = 256     #
     n_ovr = 1     #
     thres = 0.1        # 
     lanczos = 5      #
